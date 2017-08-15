@@ -1,5 +1,7 @@
 # Simply Meta
-Simply Meta allows for the quick addition of complex meta tags, including SEO tags, from an javascript object or JSON.
+Simply Meta allows for the quick addition of complex meta tags, including SEO tags, from an javascript object or JSON. 
+
+[View all supported meta tags here](https://github.com/teamtofu/simply-meta/blob/master/example.json)
 
 ```js
 var simplyMeta = require('simply-meta');
