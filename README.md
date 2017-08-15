@@ -1,50 +1,52 @@
-# Gulp Fancy Meta
-An Gulp plugin to add and control easily all your HTML meta tag's in your static files, improve your SEO and save your dev time.
+# Simply Meta
+Simply Meta allows for the quick addition of complex meta tags, including SEO tags, from an javascript object or JSON.
 
-The plugin will generate all markup to optimize your social content.
-You just need put the ```fancyfile.json``` on the root folder of your project and edit with your info.
-The generator will put all markup to Twitter cards, Pinterest rich pins, Google's structured data and Facebook's Open Graph inside your HTML files.
-
-Facy Meta will inject inside your ```<head>``` tag the code with the ```fancyfile.json``` content that you already provided. Between the code, the plugin will add twice "markers" like comments in your code to prevent your previous code be deleted.
-These comments will be something like this:
+```js
+var simplyMeta = require('simply-meta');
+return simplyMeta({
+    charset: "utf-8",
+    httpEquiv: {
+        cacheControl: "Public"
+    }
+});
 ```
-<!-- FancyMeta[beginning] -->
-<meta name="fancyfile-key" content="fancyfile-value">
-<!-- FancyMeta[end] -->
+
+Outputs...
+
+```html
+<meta data-sm="" charset="utf-8"><meta data-sm="" http-equiv="Cache-Control" content="Public">
 ```
 
 ## Install
-```
-npm install gulp-fancy-meta --save-dev
-```
-
-## In your GulpFile
-```
-var gulpFancyMeta = require('gulp-fancy-meta');
-
-///////////
-// TASK //
-//////////
-gulp.task('fancyMeta', function() {
-    return gulp.src('*.html')
-    .pipe(gulpFancyMeta())
-    .pipe(gulp.dest(''));
-});
-
-///////////
-// BUILD //
-///////////
-gulp.task('default', ['fancyMeta']);
+```sh
+npm i -D simply-meta
+yarn add -D simply-meta
 ```
 
-## Run
-```
-gulp
-```
-or
-```
-gulp fancyMeta
-```
-If you are a SEO-ninja, after Gulp run maybe some tags that you already put in your code will be duplicated. Verify your ```<head>``` and check if you not have some tag duplicated in your HTML files.
 
-And voilà! It's simple. Enjoy! :)
+## Functions
+```js
+var simplyMeta = require('simply-meta');
+
+var meta = {
+    charset: "utf-8",
+    httpEquiv: {
+        cacheControl: "Public"
+    }
+};
+var options = {};
+
+var metaHtml = simplyMeta(meta, options);
+// returns the meta tags as html
+
+var html = '<!DOCTYPE html><html><head></head><body></body></html>';
+var metaHtmlAdded = simplyMeta.html(meta, html, options);
+// returns the html with meta tags in the header
+```
+
+## Options
+```js
+var options = {
+    disableHelper: true // disables the output of data-sm="" (use only if you are not reusing the html)
+};
+```
